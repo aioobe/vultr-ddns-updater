@@ -35,7 +35,7 @@ SSH to the server and do
     $ nano -w ddns-server.sh
     <configure API_KEY, DOMAIN and PASSPHRASE>
 
-Run `./ddns-server.sh` in for example crontab `@reboot`, or in a tmux session.
+Run `$HOME/vultr-ddns-updater/ddns-server.sh` in for example crontab `@reboot`, or in a tmux session.
 
 ## Setup of client (the machine with dynamic IP)
 
@@ -56,8 +56,8 @@ Check the Vultr DNS page and make sure the corresponding A record has been updat
 
 Add this (or something similar) to your crontab:
 
-    @reboot ./ddns-client.sh
-    */30 * * * * ./ddns-client.sh
+    @reboot $HOME/vultr-ddns-updater/ddns-client.sh
+    */30 * * * * $HOME/vultr-ddns-updater/ddns-client.sh
 
 ## Troubleshooting
 
