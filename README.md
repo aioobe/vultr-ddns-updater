@@ -31,7 +31,7 @@ SSH to the server and do
 
     $ git clone https://github.com/aioobe/vultr-ddns-updater.git
     $ cd vultr-ddns-updater
-    $ sudo apt get install jq
+    $ sudo apt install jq
     $ nano -w ddns-server.sh
     <configure API_KEY, DOMAIN and PASSPHRASE>
 
