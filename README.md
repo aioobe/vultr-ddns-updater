@@ -5,6 +5,13 @@ Simple shell based ddns server/client for Vultr.
 - No Python. Not even HTTP. Just `curl`, `netcat`, `gpg` and `jq`.
 - Allows you to restrict the use of the Vultr API key to a single host
 
+# Setup
+
+We're going to set up
+
+- A **ddns server** on a machine with a stable public facing IP address, such as a Vultr instance
+- A **ddns client** on the machine with the dynamic IP that we want to have a DNS record for
+
 ## Prep work on the Vultr side
 
 Enable the API
@@ -13,12 +20,13 @@ Enable the API
 - Go to account page > API
 - Enable API
 - Copy the API key
+- Under Access Control, add the IP of your ddns server, followed by / 32
 
-Create a DNS A record that you want to dynamically update
+Create a DNS 'A' record for the ddns client.
 
 - Go to Products > DNS
 - Select the domain under which you would like to put the dynamic record
-- Add an A record with a name that matches the hostname of the server with the dynamic IP address
+- Add an A record with a name that **matches the hostname** of the machine with the dynamic IP address
 - Example: `A  frohike  123.123.123.123  3600`
 
 (Use a dummy IP for now, so we can test that the setup works in the end.)
