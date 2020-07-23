@@ -6,10 +6,16 @@ PASSPHRASE="..." # Random string of characters, such as the output of `pwgen 25 
 
 while true
 do
-    netcat -lnvp 5353 2> err.txt \
-        | gpg --decrypt --batch --yes --passphrase "$PASSPHRASE" > out.txt 2> /dev/null
+    netcat -lnvp 5353 > out.gpg 2> netcat.log
+    ip=$(awk '/Connection from/ { print $3 }' netcat.log)
 
-    ip=$(grep "^Connection from" err.txt | cut -d' ' -f3)
+    # Decrypt request
+    if ! gpg --decrypt --batch --passphrase "$PASSPHRASE" < out.gpg > out.txt 2> /dev/null
+    then
+        echo "Invalid request from $ip. Ignoring."
+        continue
+    fi
+
     name=$(head -n 1 out.txt)
 
     # Log remaining body (ifconfig output) to ease port forwarding setup.
